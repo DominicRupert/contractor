@@ -39,12 +39,19 @@ namespace contractor.Services
 
         internal Contractor Edit(int id, Contractor contractor)
         {
-            throw new NotImplementedException();
+           Contractor original = Get(contractor.Id);
+              original.Name = contractor.Name ?? original.Name;
+              original.Profession = contractor.Profession ?? original.Profession; 
+
+            _repo.Edit(original);
+            return original;
+
         }
 
-        internal Contractor Delete(int id)
+        internal void Delete(int id)
         {
-            throw new NotImplementedException();
+            Contractor foundContractor = Get(id);
+            _repo.Delete(id);
         }
     }
 }

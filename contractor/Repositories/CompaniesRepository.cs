@@ -50,6 +50,11 @@ namespace contractor.Repositories
             return _db.QueryFirstOrDefault<Company>(sql, original);
         }
 
+        internal void Edit(Company original)
+        {
+            throw new NotImplementedException();
+        }
+
         internal void Delete(int id)
         {
             string sql = @"

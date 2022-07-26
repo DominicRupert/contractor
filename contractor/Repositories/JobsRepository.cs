@@ -21,9 +21,9 @@ namespace contractor.Repositories
         {
             string sql = @"
             INSERT INTO jobs
-            (contractorId, companyId)
+            (contractorId,name, companyId)
             VALUES
-            (@ContractorId, @CompanyId);
+            (@ContractorId, @CompanyId, @Name);
             SELECT LAST_INSERT_ID();";
             newJob.Id = _db.ExecuteScalar<int>(sql, newJob);
             return newJob;

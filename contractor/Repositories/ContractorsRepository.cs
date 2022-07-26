@@ -49,6 +49,15 @@ namespace contractor.Repositories
             _db.Execute(sql, original);
         }
 
+        internal void Edit(Contractor original)
+        {
+            string sql = @"
+            UPDATE contractors
+            SET name = @Name, profession = @Profession
+            WHERE id = @Id";
+            _db.Execute(sql, original);
+        }
+
         internal void Delete(int id)
         {
             string sql = @"

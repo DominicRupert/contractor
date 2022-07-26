@@ -36,14 +36,23 @@ namespace contractor.Services
             return newCompany;
         }
 
-        internal Company Edit(int id, Company company)
+        internal Company Edit( Company company)
         {
-            throw new NotImplementedException();
+            Company original = Get(company.Id);
+            original.Name = company.Name ?? original.Name;
+        
+
+
+           _repo.Edit(original);
+            return original;
         }
 
-        internal Company Delete(int id)
+        internal void Delete(int id)
         {
-            throw new NotImplementedException();
+            Company foundCompany = Get(id);
+            _repo.Delete(id);
         }
+
+      
     }
 }

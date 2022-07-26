@@ -15,12 +15,13 @@ namespace contractor.Controllers
     {
 
         private readonly CompaniesService _cs;
-        // private readonly JobsService _js;
-        public CompaniesController(CompaniesService cs)
+        private readonly JobsService _js;
+        public CompaniesController(CompaniesService cs, JobsService js)
         {
             _cs = cs;
-            // _js = js;
+            _js = js;
         }
+       
         [HttpGet]
         public ActionResult<List<Company>> Get()
         {
@@ -50,19 +51,19 @@ namespace contractor.Controllers
             }
         }
 
-        // [HttpGet("{id}/jobs")]
-        // public ActionResult<List<Job>> GetJobs(int id)
-        // {
-        //     try
-        //     {
-        //         List<Job> jobs = _cs.GetJobs(id);
-        //         return Ok(jobs);
-        //     }
-        //     catch (Exception e)
-        //     {
-        //         return BadRequest(e.Message);
-        //     }
-        // }
+        [HttpGet("{id}/jobs")]
+        public ActionResult<List<Job>> GetJobs(int id)
+        {
+            try
+            {
+                List<CompanyJobViewModel> jobs = _js.GetByCompanyId(id);
+                return Ok(jobs);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
 
 
 
@@ -87,7 +88,7 @@ namespace contractor.Controllers
         {
             try
             {
-                Company editedCompany = _cs.Edit(id, company);
+                Company editedCompany = _cs.Edit(company);
                 return Ok(editedCompany);
             }
             catch (Exception e)
@@ -97,12 +98,12 @@ namespace contractor.Controllers
         }
         [HttpDelete("{id}")]
         [Authorize]
-        public ActionResult<Company> Delete(int id)
+        public ActionResult<string> Delete(int id)
         {
             try
             {
-                Company deletedCompany = _cs.Delete(id);
-                return Ok(deletedCompany);
+                 _cs.Delete(id);
+                return Ok("Company deleted");
             }
             catch (Exception e)
             {

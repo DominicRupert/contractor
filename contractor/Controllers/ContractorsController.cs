@@ -57,19 +57,19 @@ namespace contractor.Controllers
 
     }
 
-    // [HttpGet("{id}/jobs")]
-    // public ActionResult<List<ContractorJobViewModel>> GetJobs(int id)
-    // {
-    //     try
-    //     {
-    //         List<ContractorJobViewModel> jobs = _cons.GetJobs(id);
-    //         return Ok(jobs);
-    //     }
-    //     catch (Exception e)
-    //     {
-    //         return BadRequest(e.Message);
-    //     }
-    // }
+    [HttpGet("{id}/companies")]
+    public ActionResult<List<ContractorJobViewModel>> GetCompanies(int id)
+    {
+        try
+        {
+            List<ContractorJobViewModel> companies = _js.GetByContractorId(id);
+            return Ok(companies);
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
+    }
 
     [HttpPost]
     [Authorize]
@@ -105,8 +105,8 @@ namespace contractor.Controllers
     {
         try
         {
-            Contractor deletedContractor = _cons.Delete(id);
-            return Ok(deletedContractor);
+             _cons.Delete(id);
+            return Ok("ur fired");
         }
         catch (Exception e)
         {

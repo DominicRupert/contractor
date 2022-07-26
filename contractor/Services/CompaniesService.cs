@@ -35,5 +35,15 @@ namespace contractor.Services
             Company newCompany = _repo.Create(company);
             return newCompany;
         }
+
+        internal Company Edit(int id, Company company)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal Company Delete(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

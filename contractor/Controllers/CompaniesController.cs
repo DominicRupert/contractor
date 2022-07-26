@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 namespace contractor.Controllers
 {
     [Route("api/[controller]")]
-    public class CompaniesController : Controller
+    public class CompaniesController : ControllerBase
     {
 
         private readonly CompaniesService _cs;
@@ -81,6 +81,35 @@ namespace contractor.Controllers
                 return BadRequest(e.Message);
             }
         }
+        [HttpPut("{id}")]
+        [Authorize]
+        public ActionResult<Company> Edit(int id, [FromBody] Company company)
+        {
+            try
+            {
+                Company editedCompany = _cs.Edit(id, company);
+                return Ok(editedCompany);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+        [HttpDelete("{id}")]
+        [Authorize]
+        public ActionResult<Company> Delete(int id)
+        {
+            try
+            {
+                Company deletedCompany = _cs.Delete(id);
+                return Ok(deletedCompany);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
 
     }
     }

@@ -39,6 +39,28 @@ namespace contractor.Repositories
             company.Id = _db.ExecuteScalar<int>(sql, company);
             return company;
         }
+
+        internal Company Edit(int id, Company original)
+        {
+            string sql = @"
+            UPDATE companies
+            SET name = @Name
+            WHERE id = @Id;
+           ";
+            return _db.QueryFirstOrDefault<Company>(sql, original);
+        }
+
+        internal void Delete(int id)
+        {
+            string sql = @"
+            DELETE FROM companies
+            WHERE id = @Id;
+            LIMIT 1";
+            _db.Execute(sql, new { id });
+        }
+
+
+
         
     }
 }

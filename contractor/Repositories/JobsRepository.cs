@@ -55,8 +55,8 @@ namespace contractor.Repositories
             string sql = @"
             SELECT
             c.*,
-            j.id AS jobId,
-            From jobs j
+            j.id AS jobId
+            FROM jobs j
             JOIN companies c ON c.id = j.companyId
             WHERE j.contractorId = @id;
             ";
@@ -68,8 +68,8 @@ namespace contractor.Repositories
             string sql = @"
             SELECT
             cons.*,
-            j.id AS jobId,
-            From jobs j
+            j.id AS jobId
+            FROM jobs j
             JOIN contractors cons ON cons.id = j.contractorId
             WHERE j.companyId = @id;
             ";

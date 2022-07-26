@@ -24,7 +24,7 @@ namespace contractor.Repositories
 
         internal Contractor Get(int id)
         {
-            string sql = "SELECT * FROM contractors WHERE id = @id";
+            string sql = "SELECT * FROM contractors WHERE id = @Id";
             return _db.QueryFirstOrDefault<Contractor>(sql, new { id });
         }
 

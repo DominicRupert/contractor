@@ -21,9 +21,9 @@ namespace contractor.Repositories
         {
             string sql = @"
             INSERT INTO jobs
-            (contractorId,name, companyId)
+            (name, contractorId, companyId)
             VALUES
-            (@ContractorId, @CompanyId, @Name);
+            (@Name, @ContractorId, @CompanyId);
             SELECT LAST_INSERT_ID();";
             newJob.Id = _db.ExecuteScalar<int>(sql, newJob);
             return newJob;
@@ -38,9 +38,15 @@ namespace contractor.Repositories
             return _db.QueryFirstOrDefault<Job>(sql, newJob);
         }
 
+        internal List<Job> Get()
+        {
+            string sql = "SELECT * FROM jobs;";
+            return _db.Query<Job>(sql).ToList();
+        }
+
         internal Job Get(int id)
         {
-            string sql = "SELECT * FROM jobs WHERE id = @id";
+            string sql = "SELECT * FROM jobs WHERE id = @Id";
             return _db.QueryFirstOrDefault<Job>(sql, new { id });
         }
 
@@ -52,7 +58,7 @@ namespace contractor.Repositories
             j.id AS jobId,
             From jobs j
             JOIN companies c ON c.id = j.companyId
-            WHERE j.contractorId = @id;
+            WHERE j.contractorId = @Id;
             ";
             return _db.Query<CompanyJobViewModel>(sql, new { id }).ToList();
         }
@@ -65,7 +71,7 @@ namespace contractor.Repositories
             j.id AS jobId,
             From jobs j
             JOIN contractors cons ON cons.id = j.contractorId
-            WHERE j.companyId = @id;
+            WHERE j.companyId = @Id;
             ";
             return _db.Query<ContractorJobViewModel>(sql, new { id }).ToList();
         }

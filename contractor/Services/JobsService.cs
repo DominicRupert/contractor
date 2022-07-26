@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using contractor.Models;
 using contractor.Repositories;
+using Microsoft.AspNetCore.Mvc;
 
 namespace contractor.Services
 {
@@ -25,6 +26,12 @@ namespace contractor.Services
             }
             return _repo.Create(newJob);
         }
+
+        internal List<Job> Get()
+        {
+            return _repo.Get();
+        }
+                
 
         internal Job Get(int id)
         {

@@ -21,6 +21,13 @@ namespace contractor.Controllers
             _js = js;
         }
 
+        [HttpGet]
+        public ActionResult<List<Job>> Get()
+        {
+            return _js.Get();
+        }
+
+
         [HttpPost]
         [Authorize]
 

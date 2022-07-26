@@ -24,7 +24,7 @@ namespace contractor.Repositories
 
         internal Company Get(int id)
         {
-            string sql = "SELECT * FROM companies WHERE id = @Id";
+            string sql = "SELECT * FROM companies WHERE id = @id";
             return _db.QueryFirstOrDefault<Company>(sql, new { id });
         }
 
@@ -45,7 +45,7 @@ namespace contractor.Repositories
             string sql = @"
             UPDATE companies
             SET name = @Name
-            WHERE id = @Id;
+            WHERE id = @id;
            ";
             return _db.QueryFirstOrDefault<Company>(sql, original);
         }
@@ -59,7 +59,7 @@ namespace contractor.Repositories
         {
             string sql = @"
             DELETE FROM companies
-            WHERE id = @Id;
+            WHERE id = @id;
             LIMIT 1";
             _db.Execute(sql, new { id });
         }

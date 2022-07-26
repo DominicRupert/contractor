@@ -46,7 +46,7 @@ namespace contractor.Repositories
 
         internal Job Get(int id)
         {
-            string sql = "SELECT * FROM jobs WHERE id = @Id";
+            string sql = "SELECT * FROM jobs WHERE id = @id";
             return _db.QueryFirstOrDefault<Job>(sql, new { id });
         }
 
@@ -58,7 +58,7 @@ namespace contractor.Repositories
             j.id AS jobId,
             From jobs j
             JOIN companies c ON c.id = j.companyId
-            WHERE j.contractorId = @Id;
+            WHERE j.contractorId = @id;
             ";
             return _db.Query<CompanyJobViewModel>(sql, new { id }).ToList();
         }
@@ -71,7 +71,7 @@ namespace contractor.Repositories
             j.id AS jobId,
             From jobs j
             JOIN contractors cons ON cons.id = j.contractorId
-            WHERE j.companyId = @Id;
+            WHERE j.companyId = @id;
             ";
             return _db.Query<ContractorJobViewModel>(sql, new { id }).ToList();
         }
@@ -80,7 +80,7 @@ namespace contractor.Repositories
         {
             string sql = @"
             DELETE FROM jobs
-            WHERE id = @Id;
+            WHERE id = @id;
             LIMIT 1";
             _db.Execute(sql, new { id });
         }

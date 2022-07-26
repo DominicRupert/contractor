@@ -6,3 +6,29 @@ CREATE TABLE IF NOT EXISTS accounts(
   email varchar(255) COMMENT 'User Email',
   picture varchar(255) COMMENT 'User Picture'
 ) default charset utf8 COMMENT '';
+
+
+CREATE TABLE IF NOT EXISTS companies(
+  id INT NOT NULL AUTO_INCREMENT primary key COMMENT 'primary key',
+  name varchar(255) COMMENT 'Company Name',
+  availableJobs INT COMMENT 'Number of Available Jobs',
+
+) DEFAULT CHARSET utf8 COMMENT '';
+
+
+CREATE TABLE IF NOT EXISTS contractors(
+  id INT NOT NULL AUTO_INCREMENT primary key COMMENT 'primary key',
+  name varchar(255) COMMENT 'Contractor Name',
+  FOREIGN KEY (companyId) REFERENCES companies(id)
+) DEFAULT CHARSET utf8 COMMENT '';
+
+
+CREATE TABLE IF NOT EXISTS jobs(
+  id INT NOT NULL AUTO_INCREMENT primary key COMMENT 'primary key',
+  name varchar(255) COMMENT 'Job Name',
+  description varchar(255) COMMENT 'Job Description',
+ 
+  FOREIGN KEY (companyId) REFERENCES companies(id) ON DELETE CASCADE,
+  FOREIGN KEY (contractorId) REFERENCES contractors(id) ON DELETE CASCADE
+) DEFAULT CHARSET utf8 COMMENT '';
+

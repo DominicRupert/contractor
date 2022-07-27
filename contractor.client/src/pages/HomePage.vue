@@ -1,17 +1,52 @@
 <template>
-  <div class="home flex-grow-1 d-flex flex-column align-items-center justify-content-center">
-    <div class="home-card p-5 bg-white rounded elevation-3">
-      <img src="https://bcw.blob.core.windows.net/public/img/8600856373152463" alt="CodeWorks Logo" class="rounded-circle">
-      <h1 class="my-5 bg-dark text-white p-3 rounded text-center">
-        Vue 3 Starter
-      </h1>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h1>{{contractors.name}}}</h1>
     </div>
   </div>
+</div>
 </template>
 
 <script>
+import {computed, onMounted, ref} from 'vue';
+import { AppState } from '../AppState.js';
+import { companiesService } from '../services/CompaniesService.js';
+import { contractorsService } from '../services/ContractorsService.js';
+import { jobsService } from '../services/JobsService.js';
+import { logger } from '../utils/Logger.js';
+import Pop from '../utils/Pop.js';
+
 export default {
-  name: 'Home'
+  setup(){
+    const activeJobId = ref(0)
+    onMounted(async()=> {
+      try{
+        await companiesService.getCompanies();
+        await contractorsService.getContractors();
+        await jobsService.getJobs();
+
+      }catch (e) {
+        logger.error(e);
+        Pop.error(e.message);
+      }
+    })
+return {
+  activeJobId,
+  companies: computed(() => AppState.companies),
+  contractors: computed(() => AppState.contractors),
+  jobs: computed(() => AppState.jobs),
+  async setActiveJob(){
+    try{
+      await jobsService.getByCompanyId(activeJobId.value);
+    }catch (e) {
+      logger.error(e);
+      Pop.error(e.message);
+    }
+  }
+}
+  }
+  
 }
 </script>
 

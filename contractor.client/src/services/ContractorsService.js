@@ -1,6 +1,6 @@
-import { AppState } from "../AppState.js";
-import { api } from "./AxiosService.js";
-import { logger } from "../logger.js";
+import { AppState } from "../AppState.js"
+import { api } from "./AxiosService.js"
+import { logger } from "../utils/logger.js"
 
 
 class ContractorsService {

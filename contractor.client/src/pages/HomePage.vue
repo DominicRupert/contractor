@@ -1,10 +1,20 @@
 <template>
 <div class="container">
-  <div class="row">
-    <div class="col-md-12">
-      <h1>{{contractors.name}}}</h1>
-    </div>
-  </div>
+<Job v-for="j in jobs" :key="j.id" :job="j" />
+<div class="row">
+<div class="col-6">
+
+  <h1 v-for="con in contractors" :key="con.id" >
+    {{con.profession}}
+    
+
+</h1>
+</div>
+<div class="col-6">
+
+  <h1 v-for="c in companies" :key="c.id">{{c.name}}</h1>
+</div>
+</div>
 </div>
 </template>
 

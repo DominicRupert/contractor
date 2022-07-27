@@ -49,7 +49,7 @@ namespace contractor.Services
             _repo.Delete(id);
         }
 
-        internal List<CompanyJobViewModel> GetByCompanyId(int id)
+        internal List<ContractorJobViewModel> GetByCompanyId(int id)
         {
             return _repo.GetByCompanyId(id);
         }

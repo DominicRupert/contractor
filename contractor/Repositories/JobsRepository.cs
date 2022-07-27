@@ -50,27 +50,29 @@ namespace contractor.Repositories
             return _db.QueryFirstOrDefault<Job>(sql, new { id });
         }
 
-        internal List<CompanyJobViewModel> GetByCompanyId(int id)
+        internal List<CompanyJobViewModel> GetByContractorId(int id)
+
+
         {
             string sql = @"
             SELECT
             c.*,
-            j.id AS jobId,
-            From jobs j
-            JOIN companies c ON c.id = j.companyId
+            j.id AS JobId
+            FROM jobs j
+            JOIN contractors cons ON cons.id = j.companyId
             WHERE j.contractorId = @id;
             ";
             return _db.Query<CompanyJobViewModel>(sql, new { id }).ToList();
         }
 
-        internal List<ContractorJobViewModel> GetByContractorId(int id)
+        internal List<ContractorJobViewModel> GetByCompanyId(int id)
         {
             string sql = @"
             SELECT
             cons.*,
-            j.id AS jobId,
-            From jobs j
-            JOIN contractors cons ON cons.id = j.contractorId
+            j.id AS JobId
+            FROM jobs j
+            JOIN companies c ON c.id = j.contractorId
             WHERE j.companyId = @id;
             ";
             return _db.Query<ContractorJobViewModel>(sql, new { id }).ToList();

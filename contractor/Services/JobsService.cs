@@ -54,7 +54,7 @@ namespace contractor.Services
             return _repo.GetByCompanyId(id);
         }
 
-        internal List<ContractorJobViewModel> GetByContractorId(int id)
+        internal List<CompanyJobViewModel> GetByContractorId(int id)
         {
             return _repo.GetByContractorId(id);
         }

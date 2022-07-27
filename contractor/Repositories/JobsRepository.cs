@@ -51,13 +51,11 @@ namespace contractor.Repositories
         }
 
         internal List<CompanyJobViewModel> GetByContractorId(int id)
-
-
         {
             string sql = @"
             SELECT
             c.*,
-            j.id AS jobId
+            j.id AS JobId
             FROM jobs j
             JOIN companies c ON c.id = j.companyId
             WHERE j.contractorId = @id;
@@ -70,7 +68,7 @@ namespace contractor.Repositories
             string sql = @"
             SELECT
             cons.*,
-            j.id AS jobId
+            j.id AS JobId
             FROM jobs j
             JOIN contractors cons ON cons.id = j.contractorId
             WHERE j.companyId = @id;

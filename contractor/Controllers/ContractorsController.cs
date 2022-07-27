@@ -58,11 +58,11 @@ namespace contractor.Controllers
     }
 
     [HttpGet("{id}/companies")]
-    public ActionResult<List<ContractorJobViewModel>> GetCompanies(int id)
+    public ActionResult<List<CompanyJobViewModel>> GetCompanies(int id)
     {
         try
         {
-            List<ContractorJobViewModel> companies = _js.GetByContractorId(id);
+            List<CompanyJobViewModel> companies = _js.GetByContractorId(id);
             return Ok(companies);
         }
         catch (Exception e)

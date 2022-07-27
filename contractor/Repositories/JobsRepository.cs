@@ -57,9 +57,9 @@ namespace contractor.Repositories
             string sql = @"
             SELECT
             c.*,
-            j.id AS JobId
+            j.id AS jobId
             FROM jobs j
-            JOIN contractors cons ON cons.id = j.companyId
+            JOIN companies c ON c.id = j.companyId
             WHERE j.contractorId = @id;
             ";
             return _db.Query<CompanyJobViewModel>(sql, new { id }).ToList();
@@ -70,9 +70,9 @@ namespace contractor.Repositories
             string sql = @"
             SELECT
             cons.*,
-            j.id AS JobId
+            j.id AS jobId
             FROM jobs j
-            JOIN companies c ON c.id = j.contractorId
+            JOIN contractors cons ON cons.id = j.contractorId
             WHERE j.companyId = @id;
             ";
             return _db.Query<ContractorJobViewModel>(sql, new { id }).ToList();
